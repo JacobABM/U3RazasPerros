@@ -1,0 +1,33 @@
+﻿@model U3RazasPerros.Models.ViewModels.IndexViewModel
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+
+@{
+    Layout = "MasterPage";
+
+}
+
+
+ <section class="nav">
+    <h2>ABC de Razas</h2>        
+    <ul>
+        <li><a href="~/Razas">Todos</a></li>
+        @foreach (var letra in Model.Iniciales)
+        {
+                <li><a href="~/Razas/@letra">@letra</a></li>
+        }
+    </ul>
+ </section>
+
+ <section class="list">
+    <ul>
+        @foreach(var raza in Model.Perros){
+        <li>
+            <a href="~/@(raza.Nombre.Replace(" ","-"))/Datos">
+                <img src="~/imgs_perros/@(raza.Id)_0.jpg" />
+                @raza.Nombre
+            </a>
+        </li>
+        }
+    </ul>                   
+    <br class="clear" />
+</section>

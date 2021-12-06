@@ -1,0 +1,83 @@
+﻿@model U3RazasPerros.Areas.Admin.Models.RPerrosViewModel
+@{
+    ViewData["Title"] = "Agregar";
+    Layout = "_LayoutAdmin";
+}
+
+
+
+<div style="float:left;">
+    <form method="post" asp-area="Admin" asp-action="Agregar" asp-controller="Razas" enctype="multipart/form-data">
+        <div id="ElementosAd">
+            <h3>Agregar Nueva Raza</h3>
+            <label>Nombre:</label>
+            <input type="text" asp-for="Raza.Nombre" required><br>
+            <label style="color:deepskyblue; margin-top:4px;">Otros Nombres:</label>
+            <input type="text" asp-for="Raza.OtrosNombres"><br>
+               <label style="color:deepskyblue; margin-top:4px;">Pais:</label>
+            <select required asp-for="Raza.IdPais" asp-items="@(new SelectList(Model.Paises, "Id", "Nombre"))">
+                <option selected value="">País de Origen</option>
+            </select><br>
+           
+        </div>
+      <div>
+            <label style="color:deepskyblue; margin-top:4px;">Peso Mínimo:</label>
+            <input asp-for="Raza.PesoMin" type="number" required style="margin-top:4px;"><br>
+            <label style="color:deepskyblue; margin-top:4px;">Peso Máximo:</label>
+            <input asp-for="Raza.PesoMax" type="number" required><br>
+            <label style="color:deepskyblue; margin-bottom:4px;">Altura Mínima:</label>
+            <input type="number" asp-for="Raza.AlturaMin" required><br>
+            <label style="color:deepskyblue; margin-bottom:4px;">Altura Máxima:</label>
+            <input type="number" asp-for="Raza.AlturaMax" required><br>
+            <label style="color:deepskyblue; margin-bottom:4px;">Esperanza de vida:</label>
+            <input type="number" asp-for="Raza.EsperanzaVida" required><br>
+
+            <label style="color:deepskyblue; margin-bottom:4px;">Patas:</label>
+            <input type="text" asp-for="Raza.Caracteristicasfisicas.Patas"><br>
+            <label style="color:deepskyblue; margin-bottom:4px;">Cola:</label>
+            <input type="text" asp-for="Raza.Caracteristicasfisicas.Cola"><br>
+            <label style="color:deepskyblue; margin-bottom:4px;">Hocico:</label>
+            <input type="text" asp-for="Raza.Caracteristicasfisicas.Hocico"><br>
+            <label style="color:deepskyblue; margin-bottom:4px;">Pelo:</label>
+            <input type="text" asp-for="Raza.Caracteristicasfisicas.Pelo"><br>
+            <label style="color:deepskyblue; margin-bottom:10px;">Color:</label>
+            <input type="text" asp-for="Raza.Caracteristicasfisicas.Color"><br>
+            <label>Descripción:</label>
+        </div>
+
+        <div> 
+            <textarea asp-for="Raza.Descripcion" required style="resize:none; height:250px; width:500px;"></textarea>
+            <p id="error">
+                @Html.ValidationSummary()
+            </p>
+        </div>
+         <input type="submit" style="width:200px; border:hidden; background:powderblue;">
+        </form>
+      </div>
+
+        <div style="margin:10px; margin-top:25px;"> 
+            <img id="imagePreview" src="~/imgs_perros/NoPhoto.jpg" alt="Vista previa de la imagen">
+            <input  type="file" id="fileImage" name="imagen" accept="image/jpeg">
+        </div>
+  
+
+<br class="clear" />
+
+<script>
+    function mostrarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('#imagePreview').src= e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.querySelector("#fileImage").addEventListener("change", event => {
+        mostrarImagen(event.target)
+    });
+
+</script>
+
+

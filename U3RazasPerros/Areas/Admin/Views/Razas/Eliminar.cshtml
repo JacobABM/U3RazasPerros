@@ -1,0 +1,41 @@
+﻿@model U3RazasPerros.Models.Razas;
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "_LayoutAdmin";
+}
+
+<section>   
+<a href="~/Admin/Razas/" style="width:13%; display:block; text-align:center; color:white; border:0; background-color:cadetblue;">
+        Volver
+    </a>
+</section>
+<div id="Elementos">
+    <div id="Img" style="float: left; margin-right:10px;">
+        @if (System.IO.File.Exists($"{env.WebRootPath}/imgs_perros/{Model.Id}_0.jpg"))
+        {
+            <img id="imagePreview" src="~/imgs_perros/@(Model.Id)_0.jpg" alt="Vista previa de la imagen">
+        }
+        else
+        {
+            <img id="imagePreview" src="~/imgs_perros/NoPhoto.jpg" alt="Vista previa de la imagen">
+        }
+    </div>
+
+
+    <p style="margin-top:50px;">¿Está Seguro de eliminar: @(Model.Nombre)?</p>
+    <p>
+        @Html.ValidationSummary()
+    </p>
+    <form method="post" asp-area="Admin" asp-controller="Razas" asp-action="Eliminar" >
+        <input asp-for="Nombre" value="@(Model.Nombre)" hidden />
+        <input asp-for="Id" value="@(Model.Id)" hidden />
+        <input style="width:120px; margin-left:100px" type="submit" value="Eliminar">
+    </form>
+
+</div>
+
+
+<br class="clear" />
+

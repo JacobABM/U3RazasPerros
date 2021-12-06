@@ -1,0 +1,41 @@
+﻿@model IEnumerable<U3RazasPerros.Models.Razas>
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
+}
+
+<section>   
+<a href="~/Admin/Razas/Agregar" style="width:13%; display:block; text-align:center; color:white; border:hidden; background-color:cadetblue; text-decoration:none;">
+        Agregar
+    </a>
+</section>
+
+<section class="list" id="listAdm">
+    <ul>
+        @foreach (var r in Model)
+        {
+            <li style="margin-top:50px; margin-bottom:55px">
+                <div id="idBox" style="background:#95D1CC;">
+                    @if (System.IO.File.Exists($"{env.WebRootPath}/imgs_perros/{r.Id}_0.jpg"))
+                    {
+                        <img src="/imgs_perros/@(r.Id)_0.jpg" />
+                    }
+                    else
+                    {
+                        <img src="/imgs_perros/NoPhoto.jpg" />
+                    }
+                    <b>Nombre: </b>@r.Nombre<br>
+                    <b>Esperanza: </b>@(r.EsperanzaVida) años<br>
+                    <b>Peso: </b>@(r.PesoMin)kg <b>-</b> @(r.PesoMax)kg<br>
+                    <b>Altura: </b>@(r.AlturaMin)cm <b>-</b> @(r.AlturaMax)cm
+                    <div class="btnAdm">
+                        <a href="~/Admin/Razas/Editar/@(r.Id)">Editar</a>
+                        <a href="~/Admin/Razas/Eliminar/@(r.Id)">Eliminar</a>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</section>
+

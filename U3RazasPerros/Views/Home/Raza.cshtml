@@ -1,0 +1,53 @@
+﻿@model U3RazasPerros.Models.Razas
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{
+    ViewData["Title"] = "Raza";
+    Layout = "MasterPage";
+}
+
+            <h2>@Model.Nombre</h2>
+
+            <section class="descripcion">
+    @Model.Descripcion
+            </section>
+
+            <section class="galeria">
+                <img src="~/imgs_perros/@(Model.Id)_0.jpg" />
+            </section>
+
+            <section class="datos">
+                <h3>Datos</h3>
+                <label>Otros nombres: </label>
+                <span>@Model.OtrosNombres</span>
+                <br />
+                <label>País de Origen: </label>
+                <span>@Model.IdPaisNavigation.Nombre</span><br />
+                <label>Peso: </label>
+                <span>@(Model.PesoMin)kg - @(Model.PesoMax)kg</span><br />
+                <label>Altura: </label>
+                <span>@(Model.AlturaMin)cm - @(Model.AlturaMax)cm</span><br />
+                <label>Esperanza de Vida: </label>
+                <span>@Model.EsperanzaVida años</span><br />
+            </section>
+
+            <section class="datos">
+                <h3>Caracteristicas Físicas</h3>
+                <label>Patas: </label>
+                <span>@Model.Caracteristicasfisicas.Patas</span>
+                <br />
+                <label>Cola: </label>
+                <span>@Model.Caracteristicasfisicas.Cola</span>
+                <br />
+                <label>Hocico: </label>
+                <span>@Model.Caracteristicasfisicas.Hocico</span>
+                <br />
+                <label>Pelo: </label>
+                <span>@Model.Caracteristicasfisicas.Pelo</span>
+                <br />
+                <label>Color: </label>
+                <span>@Model.Caracteristicasfisicas.Color</span>
+            </section>
+
+            <br class="clear" />
+            <a href="javascript:history.back();" class="button">Regresar</a>
+            
